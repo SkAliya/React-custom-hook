@@ -5,15 +5,18 @@ export default function App() {
   const [countClicks, setCountClicks] = useState(0);
   // let isLoading, position, error;
   // const { lat, lng } = position ?? "";
-  const [isLoading, position, error] = useGeolocation();
+  const [isLoading, position, error, getPosition] = useGeolocation();
   const { lat, lng } = position;
 
-  // function getPosition() {
-  //   setCountClicks((count) => count + 1);
-  // }
+  function getPos() {
+    getPosition();
+    setCountClicks((count) => count + 1);
+  }
   return (
     <div>
-      <button disabled={isLoading}>Get my position</button>
+      <button disabled={isLoading} onClick={() => getPos()}>
+        Get my position
+      </button>
 
       {isLoading && <p>Loading position...</p>}
       {error && <p>{error}</p>}
